@@ -8,7 +8,7 @@ Since there are no tools online to do so, this is a tool to simplify the process
 The ambition of the tool is to simulate it on localstack, to test how the tool would work if it was industralised on cloud (i.e. if there are many different users, they can upload new stock transactions and obtain a HMRC-ready output).
 
 It is separated into the following stages and their branch:
-1. Generate random inputs to test the code - feat/gen-inputs
+1. Generate random inputs to test the code - feat/gen-inputs and feat/gen-inputs-complete
 2. Develop inputs management (excel to start with) - feat/simple-inputs
 3. Calculates the capital gains following HMRC's rules (including same day, bed and breakfast rules and Section 104) https://www.gov.uk/hmrc-internal-manuals/capital-gains-manual/cg51560
 4. Outputs the results into a HMRC valid output

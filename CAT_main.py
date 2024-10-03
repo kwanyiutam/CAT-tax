@@ -1,3 +1,3 @@
-from math import *
+from shiny import run_app
 
-print("hello world")
+run_app("CAT_app")

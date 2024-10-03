@@ -277,6 +277,6 @@ def gen_input_main(stocks = stock_init,
     return df_return
 
             
-out = gen_input_main()
-print(out)
+#out = gen_input_main()
+#print(out)
     
