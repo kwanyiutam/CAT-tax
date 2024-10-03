@@ -11,6 +11,16 @@ class IncorrectStockDetails(Exception):
 class NoSuchStock(Exception):
     pass
 
+## check_bool
+## Function: Checks whether the input was an boolean
+## Input: element - Element to check
+## Output: Return number, or raised an exception
+def check_bool(element):
+    if isinstance(element, bool):
+        return(element)
+    else:
+        raise ValueError("The input is not an boolean")
+
 ## check_int
 ## Function: Checks whether the input was an integer
 ## Input: num - Number to check
@@ -20,38 +30,7 @@ def check_int(num):
         return(num)
     else:
         raise ValueError("The input is not an integer")
-    
-
-## check_stocks_in
-## Function: Checks whether the stock inputs were valid
-## Input: stocks - stocks inputs
-## Output: Return dictionary, or raised an exception
-def check_stocks_in(stocks, default_in, default_in_type):
-    # Checks whether the input was dictionary
-    if isinstance(stocks, dict):
-        # For each stock element
-        for stock in list(stocks.keys()):
-            # Get the list of keys in the nested dictionary
-            stock_keys = list(stocks[stock].keys())
-            # Sort the keys
-            stock_keys.sort()
-            
-            # The list must contain everything required, if not, throw exception
-            if default_in == stock_keys:
-                # Check all elements
-                for element in default_in:
-                    # For integer inputs, check whether they are valid shares
-                    if default_in_type[element] == int:
-                        check_shares(stocks[stock][element])
-                    # If the inputs are float, check whether they are positive
-                    elif default_in_type[element] == float:
-                        check_pos(stocks[stock][element])
-                return(stocks)
-            else:
-                raise IncorrectStockDetails(f"The details provided for {stock} are not correct, please check!")
-    else:
-        raise NotDict("The input is not a dictionary")
-    
+      
 ## check_pos
 ## Function: Checks whether the input is positive (including zero)
 ## Input: num - Number to check
@@ -81,4 +60,37 @@ def check_shares(shares):
     shares = check_pos(shares)
     
     return(shares)
+    
+
+## check_stocks_in
+## Function: Checks whether the stock inputs were valid
+## Input: stocks - stocks inputs
+## Output: Return dictionary, or raised an exception
+def check_stocks_in(stocks, default_in, default_in_type):
+    # Checks whether the input was dictionary
+    if isinstance(stocks, dict):
+        # For each stock element
+        for stock in list(stocks.keys()):
+            # Get the list of keys in the nested dictionary
+            stock_keys = list(stocks[stock].keys())
+            # Sort the keys
+            stock_keys.sort()
+            
+            # The list must contain everything required, if not, throw exception
+            if default_in == stock_keys:
+                # Check all elements
+                for element in default_in:
+                    # For integer inputs, check whether they are valid shares
+                    if default_in_type[element] == int:
+                        check_shares(stocks[stock][element])
+                    # If the inputs are float, check whether they are positive
+                    elif default_in_type[element] == float:
+                        check_pos(stocks[stock][element])
+                    elif default_in_type[element] == bool:
+                        check_bool(stocks[stock][element])
+                return(stocks)
+            else:
+                raise IncorrectStockDetails(f"The details provided for {stock} are not correct, please check!")
+    else:
+        raise NotDict("The input is not a dictionary")
     
